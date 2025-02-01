@@ -6,20 +6,21 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:07:01 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/28 18:45:14 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/01 12:50:40 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void ft_pixel_put(t_fractal *fractal, int x, int y, int color)
+void    ft_pixel_put(t_fractal *f, int x, int y, int color)
 {
-    char *pixel;
+    char    *pixel;
 
-    pixel = fractal->img.pixel_ptr + (y * fractal->img.line_len + x * (fractal->img.bpp / 8));
+    pixel = f->img.pixel_ptr + (y * f->img.line_len + x * (f->img.bpp / 8));
     *(unsigned int *)pixel = color;
 }
-void handle_pixel(t_fractal *fractal, int x, int y, int max_iterations)
+
+void    handle_pixel(t_fractal *f, int x, int y, int max_iterations)
 {
     t_complex c;
     t_complex z;
@@ -27,36 +28,36 @@ void handle_pixel(t_fractal *fractal, int x, int y, int max_iterations)
     int color;
 
     iterations = 0;
-    c.x = map(x, fractal->min.x, fractal->max.x, 0, WIDTH) * fractal->zoom + fractal->offset_x;
-    c.y = map(y, fractal->min.y, fractal->max.y, 0, HEIGHT) * fractal->zoom + fractal->offset_y;
+    c.x = map(x, f->min.x, f->max.x, 0, WIDTH) * f->zoom + f->offset_x;
+    c.y = map(y, f->min.y, f->max.y, 0, HEIGHT) * f->zoom + f->offset_y;
 
-    if (fractal->type == Mandelbrot)
+    if (f->type == Mandelbrot)
     {
         z.x = c.x;
         z.y = c.y;
     }
-    else if (fractal->type == Julia)
+    else if (f->type == Julia)
     {
-        z.x = map(x, fractal->min.x, fractal->max.x, 0, WIDTH) * fractal->zoom + fractal->offset_x;
-        z.y = map(y, fractal->min.y, fractal->max.y, 0, HEIGHT) * fractal->zoom + fractal->offset_y;
-        c.x = fractal->c_juliax;
-        c.y = fractal->c_juliay;
+        z.x = map(x, f->min.x, f->max.x, 0, WIDTH) * f->zoom + f->offset_x;
+        z.y = map(y, f->min.y, f->max.y, 0, HEIGHT) * f->zoom + f->offset_y;
+        c.x = f->c_jx;
+        c.y = f->c_jy;
     }
 
-    while (iterations < fractal->max_iterations)
+    while (iterations < max_iterations)
     {
         z = complex_add(complex_square(z), c);
         if ((z.x * z.x + z.y * z.y) > 4)
         {
-            color = map(iterations, fractal->color_cycle, fractal->color_shift, 0, fractal->max_iterations);
-            ft_pixel_put(fractal, x, y, color);
+            color = map(iterations, f->color_cycle, f->color_shift, 0, f->max_iterations);
+            ft_pixel_put(f, x, y, color);
             return;
         }
         iterations++;
     }
-    ft_pixel_put(fractal, x, y, BLACK);
+    ft_pixel_put(f, x, y, BLACK);
 }
-void fractal_render(t_fractal *fractal)
+void fractal_render(t_fractal *f)
 {
     int x;
     int y;
@@ -67,14 +68,14 @@ void fractal_render(t_fractal *fractal)
         x = 0;
         while (x < WIDTH)
         {
-            handle_pixel(fractal, x, y, fractal->max_iterations);
+            handle_pixel(f, x, y, f->max_iterations);
             x++;
         }
         y++;
     }
-    mlx_put_image_to_window(fractal->mlx_connection, fractal->mlx_window, fractal->img.img_ptr, 0, 0);
+    mlx_put_image_to_window(f->mlx_connection, f->mlx_window, f->img.img_ptr, 0, 0);
 }
-void update_max_iterations(t_fractal *fractal)
+void update_max_iterations(t_fractal *f)
 {
-    fractal->max_iterations = (int)(42 + 50 * log(fractal->zoom + 1.0));
+    f->max_iterations = (int)(42 + 50 * log(f->zoom + 1.0));
 }

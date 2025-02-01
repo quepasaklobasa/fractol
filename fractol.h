@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:05:11 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/28 19:01:17 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/01/30 15:38:20 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ typedef struct s_fractal
 	double  zoom;
     double		offset_x;
     double		offset_y;
-	double	c_juliax;
-	double	c_juliay;
+	double	c_jx;
+	double	c_jy;
 	double	mouse_x;
 	double	mouse_y;
 	t_complex 	z_newton;
