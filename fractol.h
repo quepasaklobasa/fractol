@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:05:11 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/30 15:38:20 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/01 13:52:56 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define O_KEY 111
 # define C_KEY 99
 # define V_KEY 118
+# define I_KEY 105
+# define O_KEY 111
 
 # define BLACK       0x000000  
 # define WHITE       0xFFFFFF 

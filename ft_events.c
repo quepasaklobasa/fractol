@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:06:48 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/30 17:48:37 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/01 13:51:49 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ int	key_press(int keycode, t_fractal *f)
 		f->max_iterations += 10;
 	else if (keycode == L_KEY)
 		f->max_iterations -= 10;
+	else if (keycode == I_KEY)
+		f->zoom *= 1.1;
+	else if (keycode == O_KEY)
+		f->zoom /= 1.1;
 	else if (keycode == R_KEY)
 		data_init(f);
 	else if (keycode == C_KEY)
@@ -78,7 +82,7 @@ int	mouse_move(int x, int y, t_fractal *f)
 {
 	static int	last_x = -1, last_y = -1;
 
-	if (f->type == Julia && (abs(x - last_x) > 7 || abs(y - last_y) > 7))
+	if (f->type == Julia && (abs(x - last_x) > 10 || abs(y - last_y) > 10))
 	{
 		f->c_jx = map(x, f->min.x, f->max.x, 0, WIDTH) * f->zoom + f->offset_x;
 		f->c_jy = map(y, f->min.y, f->max.y, 0, HEIGHT) * f->zoom + f->offset_y;
