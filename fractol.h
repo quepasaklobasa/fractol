@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
+/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:05:11 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/01 13:52:56 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/03 02:57:54 by javi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,8 @@ int		mouse_move(int x, int y, t_fractal *fractal);
 void	update_max_iterations(t_fractal *fractal);
 int		cycle_color(t_fractal *fractal);
 int		color_palette(t_fractal *fractal);
+int		error_message(void);
+void	instructions(void);
+int		check_number(const char *str);
 
 #endif

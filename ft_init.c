@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
+/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:55:55 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/30 17:52:35 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/03 03:11:13 by javi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	fractal_init(t_fractal *f)
 	f->img.pixel_ptr = mlx_get_data_addr(f->img.img_ptr, &f->img.bpp, &f->img.line_len, &f->img.endian);
 	events_init(f);
 	data_init(f);
-
 }
 void	events_init(t_fractal *f)
 {
@@ -52,30 +51,16 @@ void	events_init(t_fractal *f)
 
 void	data_init(t_fractal *f)
 {
-	if (f->type == Mandelbrot)
-	{
-		f->max_iterations = 42;
-		f->zoom = 1.0;
-		f->offset_x = -0.5;
-		f->offset_y = 0.0;
-		f->min.x = -2.0;
-		f->min.y = -2.0;
-		f->max.x = 2.0;
-		f->max.y = 2.0;
-		f->color_shift = PSYCHEDELIC_BLUE;
-		f->color_cycle = BLACK;
-	}
-	else if (f->type == Julia)
-	{
-		f->max_iterations = 42;
-		f->zoom = 1.0;
+	f->max_iterations = 42;
+	f->zoom = 1.0;
+	f->offset_x = -0.5;
+	f->offset_y = 0.0;
+	f->min.x = -2.0;
+	f->min.y = -2.0;
+	f->max.x = 2.0;
+	f->max.y = 2.0;
+	f->color_shift = PSYCHEDELIC_BLUE;
+	f->color_cycle = BLACK;
+	if (f->type == Julia)
 		f->offset_x = 0.0;
-		f->offset_y = 0.0;
-		f->min.x = -2.0;
-		f->min.y = -2.0;
-		f->max.x = 2.0;
-		f->max.y = 2.0;
-		f->color_shift = PSYCHEDELIC_BLUE;
-		f->color_cycle = BLACK;
-	}
 }
