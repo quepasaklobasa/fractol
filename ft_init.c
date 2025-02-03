@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:55:55 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/03 03:11:13 by javi             ###   ########.fr       */
+/*   Updated: 2025/02/03 19:01:56 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	fractal_init(t_fractal *f)
 	events_init(f);
 	data_init(f);
 }
+
 void	events_init(t_fractal *f)
 {
 	mlx_hook(f->mlx_window, KeyPress, KeyPressMask, key_press, f);
-	mlx_hook(f->mlx_window, DestroyNotify, StructureNotifyMask, close_window, f);
+	mlx_hook(f->mlx_window, DestroyNotify, StructureNotifyMask, close_win, f);
 	mlx_hook(f->mlx_window, ButtonPress, ButtonPressMask, mouse_press, f);
 	mlx_hook(f->mlx_window, MotionNotify, PointerMotionMask, mouse_move, f);
 }

@@ -6,13 +6,13 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:06:48 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/01 13:51:49 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:02:25 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	close_window(t_fractal *f)
+int	close_win(t_fractal *f)
 {
 	mlx_destroy_image(f->mlx_connection, f->img.img_ptr);
 	mlx_destroy_window(f->mlx_connection, f->mlx_window);
@@ -25,7 +25,7 @@ int	close_window(t_fractal *f)
 int	key_press(int keycode, t_fractal *f)
 {
 	if (keycode == ESC_KEY)
-		close_window(f);
+		close_win(f);
 	else if (keycode == LEFT_ARROW)
 		f->offset_x -= (.5 * f->zoom);
 	else if (keycode == UP_ARROW)
@@ -38,10 +38,6 @@ int	key_press(int keycode, t_fractal *f)
 		f->max_iterations += 10;
 	else if (keycode == L_KEY)
 		f->max_iterations -= 10;
-	else if (keycode == I_KEY)
-		f->zoom *= 1.1;
-	else if (keycode == O_KEY)
-		f->zoom /= 1.1;
 	else if (keycode == R_KEY)
 		data_init(f);
 	else if (keycode == C_KEY)

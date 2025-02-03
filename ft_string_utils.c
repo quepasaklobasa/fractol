@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:30:12 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/28 18:07:06 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:46:18 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_putendl_fd(char *s, int fd)
 
 	if (!s || fd < 0)
 		return ;
-
 	i = 0;
 	while (s[i])
 	{
@@ -43,6 +42,7 @@ void	ft_putendl_fd(char *s, int fd)
 	}
 	write(fd, "\n", 1);
 }
+
 double	ft_atod(const char *str)
 {
 	double	result;
