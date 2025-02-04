@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
+/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:05:11 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/03 19:05:12 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/04 10:41:41 by javi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,28 @@ typedef struct s_complex
 
 typedef struct s_fractal
 {
-	void	*mlx_connection;
-	void	*mlx_window;
-	t_img	img;
+	void			*mlx_connection;
+	void			*mlx_window;
+	t_img			img;
 	t_complex		min;
 	t_complex		max;
-	t_fractal_type 	type;
-	int 	max_iterations;
-	double	zoom;
-	double		offset_x;
-	double		offset_y;
-	double	c_jx;
-	double	c_jy;
-	double	mouse_x;
-	double	mouse_y;
-	int		color_shift;
-	int		color_cycle;
+	t_fractal_type	type;
+	int				max_iterations;
+	double			zoom;
+	double			offset_x;
+	double			offset_y;
+	double			c_jx;
+	double			c_jy;
+	double			mouse_x;
+	double			mouse_y;
+	int				color_shift;
+	int				color_cycle;
 }	t_fractal;
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putendl_fd(char *s, int fd);
 void	fractal_init(t_fractal *fractal);
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+double	map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_square(t_complex a);
 void	events_init(t_fractal *fractal);
