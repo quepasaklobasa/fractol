@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:05:11 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/04 10:41:41 by javi             ###   ########.fr       */
+/*   Updated: 2025/02/04 15:50:12 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef enum e_fractal_type
 	Tricorn
 }	t_fractal_type;
 
+typedef struct s_range
+{
+	double min;
+	double max;
+}	t_range;
+
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -86,6 +92,8 @@ typedef struct s_fractal
 	t_complex		max;
 	t_fractal_type	type;
 	int				max_iterations;
+	int				x;
+	int				y;
 	double			zoom;
 	double			offset_x;
 	double			offset_y;
@@ -100,17 +108,21 @@ typedef struct s_fractal
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putendl_fd(char *s, int fd);
 void	fractal_init(t_fractal *fractal);
-double	map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+double	map(double unscaled_num, t_range old, t_range new);
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_square(t_complex a);
+void	zoom_up(t_fractal *f, double zoom_factor, double mouse_fx, double mouse_fy);
+void	zoom_down(t_fractal *f, double zoom_factor, double mouse_fx, double mouse_fy);
 void	events_init(t_fractal *fractal);
 void	data_init(t_fractal *fractal);
 int		key_press(int keycode, t_fractal *fractal);
 int		close_win(t_fractal *fractal);
-int		mouse_press(int button, int x, int y, t_fractal *fractal);;
+int		mouse_press(int button, int x, int y, t_fractal *fractal);
 void	ft_pixel_put(t_fractal *fractal, int x, int y, int color);
 void	handle_pixel(t_fractal *fractal, int x, int y, int max_iterations);
 void	fractal_render(t_fractal *fractal);
+double	parse_integer_part(const char *str, int *i);
+double	parse_decimal_part(const char *str, int *i);
 double	ft_atod(const char *str);
 int		mouse_move(int x, int y, t_fractal *fractal);
 void	update_max_iterations(t_fractal *fractal);
@@ -118,6 +130,8 @@ int		cycle_color(t_fractal *fractal);
 int		color_palette(t_fractal *fractal);
 int		error_message(void);
 void	instructions(void);
+void	handle_fractal(t_fractal *fractal, t_complex *z, t_complex *c, int x, int y);
 int		check_number(const char *str);
+int		get_color(int iterations, t_fractal *fractal);
 
 #endif

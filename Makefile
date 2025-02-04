@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
 MLX_REPO = https://github.com/42Paris/minilibx-linux.git
-SRCS = main.c ft_color.c ft_error.c ft_events.c ft_init.c ft_math.c ft_render.c ft_string_utils.c
+SRCS = main.c ft_color.c ft_error.c ft_events.c ft_map_help.c ft_init.c ft_math.c ft_render.c ft_string_utils.c
 OBJS = $(SRCS:.c=.o)
 LIBS = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
 

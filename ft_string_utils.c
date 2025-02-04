@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 21:30:12 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/03 17:46:18 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:29:47 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,55 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
+double	parse_integer_part(const char *str, int *i)
+{
+	double	result;
+
+	result = 0;
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		result = result * 10 + (str[*i] - '0');
+		(*i)++;
+	}
+	return (result);
+}
+
+double	parse_decimal_part(const char *str, int *i)
+{
+	double	result;
+	double	divisor;
+
+	result = 0;
+	divisor = 1;
+	if (str[*i] == '.')
+	{
+		(*i)++;
+		while (str[*i] >= '0' && str[*i] <= '9')
+		{
+			result = result * 10 + (str[*i] - '0');
+			divisor *= 10;
+			(*i)++;
+		}
+	}
+	return (result / divisor);
+}
+
 double	ft_atod(const char *str)
 {
 	double	result;
 	double	sign;
-	double	decimal;
 	int		i;
 
-	result = 0;
-	sign = 1;
-	decimal = 0;
-	i = 0;
 	if (!str)
 		return (0);
+	sign = 1;
+	i = 0;
 	if (str[i] == '-')
 	{
 		sign = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + str[i] - '0';
-		i++;
-	}
-	if (str[i] == '.')
-	{
-		i++;
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			result = result * 10 + str[i] - '0';
-			decimal++;
-			i++;
-		}
-	}
-	while (decimal--)
-		result /= 10;
+	result = parse_integer_part(str, &i);
+	result += parse_decimal_part(str, &i);
 	return (result * sign);
 }

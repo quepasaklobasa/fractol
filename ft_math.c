@@ -6,16 +6,11 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:06:57 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/03 19:04:59 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:44:21 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max)
-{
-	return (new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min;
-}
 
 t_complex	complex_add(t_complex a, t_complex b)
 {

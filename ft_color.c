@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:06:41 by jcouto            #+#    #+#             */
-/*   Updated: 2025/01/30 17:42:29 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/04 15:08:06 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,10 @@ int	cycle_color(t_fractal *fractal)
 	fractal->color_cycle = colors[index];
 	index = (index + 1) % (sizeof(colors) / sizeof(colors[0]));
 	return (0);
+}
+
+int	get_color(int iterations, t_fractal *f)
+{
+	return ((f->color_shift - f->color_cycle) * (iterations)
+		/ (f->max_iterations) + f->color_cycle);
 }

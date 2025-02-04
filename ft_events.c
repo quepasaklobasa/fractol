@@ -6,7 +6,7 @@
 /*   By: jcouto <jcouto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:06:48 by jcouto            #+#    #+#             */
-/*   Updated: 2025/02/03 17:02:25 by jcouto           ###   ########.fr       */
+/*   Updated: 2025/02/04 15:18:08 by jcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,20 @@ int	key_press(int keycode, t_fractal *f)
 
 int	mouse_press(int button, int x, int y, t_fractal *f)
 {
-	double	zoom_factor;
-	double	mouse_fractal_x;
-	double	mouse_fractal_y;
+	double	zoom_f;
+	double	mouse_fx;
+	double	mouse_fy;
 
-	mouse_fractal_x = map(x, f->min.x, f->max.x, 0, WIDTH);
-	mouse_fractal_y = map(y, f->min.y, f->max.y, 0, HEIGHT);
-	zoom_factor = 1.1;
+	mouse_fx = map(x, (t_range){0, WIDTH}, (t_range){f->min.x, f->max.x});
+	mouse_fy = map(y, (t_range){0, HEIGHT}, (t_range){f->min.y, f->max.y});
+	zoom_f = 1.1;
 	if (button == SCROLL_DOWN)
 	{
-		f->zoom *= zoom_factor;
-		f->offset_x += (mouse_fractal_x - f->offset_x) * (1 - 1 / zoom_factor);
-		f->offset_y += (mouse_fractal_y - f->offset_y) * (1 - 1 / zoom_factor);
+		zoom_up(f, zoom_f, mouse_fx, mouse_fy);
 	}
 	else if (button == SCROLL_UP)
 	{
-		f->zoom /= zoom_factor;
-		f->offset_x -= (mouse_fractal_x - f->offset_x) * (1 - zoom_factor);
-		f->offset_y -= (mouse_fractal_y - f->offset_y) * (1 - zoom_factor);
+		zoom_down(f, zoom_f, mouse_fx, mouse_fy);
 	}
 	update_max_iterations(f);
 	fractal_render(f);
@@ -80,8 +76,10 @@ int	mouse_move(int x, int y, t_fractal *f)
 
 	if (f->type == Julia && (abs(x - last_x) > 10 || abs(y - last_y) > 10))
 	{
-		f->c_jx = map(x, f->min.x, f->max.x, 0, WIDTH) * f->zoom + f->offset_x;
-		f->c_jy = map(y, f->min.y, f->max.y, 0, HEIGHT) * f->zoom + f->offset_y;
+		f->c_jx = map(x, (t_range){0, WIDTH}, (t_range){f->min.x, f->max.x})
+			* f->zoom + f->offset_x;
+		f->c_jy = map(y, (t_range){0, HEIGHT}, (t_range){f->min.y, f->max.y})
+			* f->zoom + f->offset_y;
 		fractal_render(f);
 		last_x = x;
 		last_y = y;
